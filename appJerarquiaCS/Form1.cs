@@ -52,7 +52,7 @@ namespace appJerarquiaCS
                 x = datos[0];
 
             }
-            
+            treeView1.Nodes.Add(nodo);
         }
     }
 }
