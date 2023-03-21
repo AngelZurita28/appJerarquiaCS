@@ -32,6 +32,7 @@ namespace appJerarquiaCS
         {
             string renglon;
             string x = "";
+            //string y = "";
             TreeNode nodo = new TreeNode();
 
             while ((renglon = sr.ReadLine()) != null)
@@ -40,10 +41,13 @@ namespace appJerarquiaCS
                 if (x != datos[0] && x != "")
                 {
                     
-                    nodo.Text = datos[5];
-                    treeView1.Nodes.Add(nodo);
-                    nodo = new TreeNode();
+                    if (nodo.Text != datos[5] && nodo.Text != "")
+                    {
+                        treeView1.Nodes.Add(nodo);
+                        nodo = new TreeNode();
+                    }
                 }
+                nodo.Text = datos[5];
                 nodo.Nodes.Add(x);
                 x = datos[0];
 
