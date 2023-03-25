@@ -17,7 +17,6 @@ namespace appJerarquiaCS
         {
             InitializeComponent();
         }
-
         private void btnAbrir_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -25,34 +24,64 @@ namespace appJerarquiaCS
 
             StreamReader sr = new StreamReader(ofd.FileName);
             LlenarArbol(sr);
-
-            
         }
         private void LlenarArbol(StreamReader sr)
         {
             string renglon;
             string x = "";
             //string y = "";
-            TreeNode nodo = new TreeNode();
+            TreeNode ciudad = new TreeNode();
+            TreeNode estado = new TreeNode();
+            TreeNode codigoPostal = new TreeNode();
+            TreeNode colonia = new TreeNode();
+            string cd = "";
+            string cp = "";
+            //while ((renglon = sr.ReadLine()) != null)
+            //{
+            //    string[] datos = renglon.Split('|');
+            //    if (x != datos[0] && x != "")
+            //    {                    
+            //        if (nodo.Text != datos[5] && nodo.Text != "")
+            //        {
+            //            treeView1.Nodes.Add(nodo);
+            //            nodo = new TreeNode();
+            //        }
+            //    }
+            //    nodo.Text = datos[5];
+            //    nodo.Nodes.Add(x);
+            //    x = datos[0];
+            //}
+            //treeView1.Nodes.Add(nodo);
 
             while ((renglon = sr.ReadLine()) != null)
             {
                 string[] datos = renglon.Split('|');
-                if (x != datos[0] && x != "")
+                if (colonia.Text != datos[1] && x != "")
                 {
-                    
-                    if (nodo.Text != datos[5] && nodo.Text != "")
+                    if (codigoPostal.Text != datos[0] && ciudad.Text != "")
                     {
-                        treeView1.Nodes.Add(nodo);
-                        nodo = new TreeNode();
+                        if (ciudad.Text != datos[5] && ciudad.Text != "")
+                        {
+                            if (estado.Text != datos[4] && estado.Text != "")
+                            {
+                                treeView1.Nodes.Add(estado.Text);
+                                estado = new TreeNode();
+
+                            }
+                        }
+                        estado.Text = datos[5];
+                        estado.Nodes.Add(ciudad);
+                        ciudad = new TreeNode();
                     }
+                    ciudad.Text = datos[1];
+                    codigoPostal.Nodes.Add(ciudad);
+                    codigoPostal = new TreeNode();
                 }
-                nodo.Text = datos[5];
-                nodo.Nodes.Add(x);
-                x = datos[0];
+                codigoPostal.Text = datos[5];
+                codigoPostal.Nodes.Add(codigoPostal);
+                colonia.Text = datos[0];
 
             }
-            treeView1.Nodes.Add(nodo);
         }
     }
 }
